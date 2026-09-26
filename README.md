@@ -1,1 +1,100 @@
-# python-
+
+from turtle import *
+from random import *
+
+# Функция для рисования точки на кубике
+
+def draw_dot(x, y):
+    penup()
+    goto(x, y)
+    pendown()
+    dot(20, "black")
+
+def draw_one(x, y):
+    draw_dot(x, y)
+
+def draw_two(x, y):
+    draw_dot(x - 25, y + 25)
+    draw_dot(x + 25, y - 25)
+
+def draw_three(x, y):
+    draw_dot(x - 25, y + 25)
+    draw_dot(x, y)
+    draw_dot(x + 25, y - 25)
+
+def draw_four(x, y):
+    draw_dot(x - 25, y + 25)
+    draw_dot(x + 25, y + 25)
+    draw_dot(x - 25, y - 25)
+    draw_dot(x + 25, y - 25)
+
+def draw_five(x, y):
+    draw_four(x, y)
+    draw_dot(x, y)
+
+def draw_six(x, y):
+    draw_dot(x - 25, y + 25)
+    draw_dot(x - 25, y)
+    draw_dot(x - 25, y - 25)
+    draw_dot(x + 25, y + 25)
+    draw_dot(x + 25, y)
+    draw_dot(x + 25, y - 25)
+
+# Функция для отрисовки одного кубика с центром в (x, y)
+
+def draw_dice(number, x, y):
+    penup()
+    goto(x - 50, y + 50)
+    pendown()
+    color("black", "grey")
+    begin_fill()
+
+    for i in range(4):
+        forward(100)
+        right(90)
+
+    penup()
+    goto(x - 50, y + 50)
+    pendown()
+    goto(x - 30, y + 70)
+    goto(x + 70, y + 70)
+    goto(x + 50, y + 50)
+
+    penup()
+    goto(x + 50, y + 50)
+    pendown()
+    goto(x + 70, y + 70)
+    goto(x + 70, y - 30)
+    goto(x + 50, y - 50)
+    goto(x + 50, y + 50)
+    end_fill()
+
+    if number == 1:
+        draw_one(x, y)
+    elif number == 2:
+        draw_two(x, y)
+    elif number == 3:
+        draw_three(x, y)
+    elif number == 4:
+        draw_four(x, y)
+    elif number == 5:
+        draw_five(x, y)
+    elif number == 6:
+        draw_six(x, y)
+
+    hideturtle()
+
+# Функция для броска двух кубиков
+
+def roll_dice(x_click, y_click):
+    clear()
+    draw_dice(randint(1, 6), -150, 0)  # Первый кубик слева
+    draw_dice(randint(1, 6), 100, 0)   # Второй кубик справа
+    draw_dice(randint(1, 6), 250, 0)   # Третий кубик справа
+
+roll_dice(0, 0)
+
+screen = Screen()
+screen.title("Игра: Бросок двух кубиков")
+screen.onclick(roll_dice)
+mainloop()
