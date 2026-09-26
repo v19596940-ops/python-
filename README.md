@@ -1,4 +1,3 @@
-
 from turtle import *
 from random import *
 
@@ -93,7 +92,6 @@ def roll_dice(x_click, y_click):
     draw_dice(randint(1, 6), 250, 0)   # Третий кубик справа
 
 roll_dice(0, 0)
-
 screen = Screen()
 screen.title("Игра: Бросок двух кубиков")
 screen.onclick(roll_dice)
